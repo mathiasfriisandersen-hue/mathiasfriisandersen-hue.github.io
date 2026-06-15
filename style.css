@@ -790,6 +790,10 @@ h3 {
   gap: 1.25rem;
 }
 
+.case-section-heading {
+  margin: 1.6rem 0 0.3rem;
+}
+
 .case-card {
   padding: 1.35rem;
 }
