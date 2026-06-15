@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mathiasfriisandersen-hue.github.io/sitemap.xml
