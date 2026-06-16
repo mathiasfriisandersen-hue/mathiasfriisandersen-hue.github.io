@@ -13,7 +13,8 @@
   --amber: #bd7a2f;
   --shadow: 0 24px 70px rgba(16, 32, 51, 0.12);
   --radius: 8px;
-  --container: 1120px;
+  --container: clamp(1120px, 90vw, 2200px);
+  --page-gutter: clamp(20px, 3vw, 56px);
   --header-height: 76px;
 }
 
@@ -37,6 +38,13 @@ body {
 
 body.nav-open {
   overflow: hidden;
+}
+
+.is-resizing *,
+.is-resizing *::before,
+.is-resizing *::after {
+  transition-duration: 0.01ms !important;
+  animation-duration: 0.01ms !important;
 }
 
 a {
@@ -84,7 +92,7 @@ li + li {
 }
 
 .container {
-  width: min(100% - 40px, var(--container));
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--container));
   margin-inline: auto;
 }
 
@@ -106,7 +114,7 @@ li + li {
 }
 
 .nav {
-  width: min(100% - 40px, var(--container));
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--container));
   min-height: var(--header-height);
   margin-inline: auto;
   display: flex;
@@ -227,7 +235,7 @@ li + li {
 
 .hero {
   overflow: hidden;
-  min-height: calc(100vh - var(--header-height));
+  min-height: min(calc(100vh - var(--header-height)), 980px);
   display: flex;
   align-items: center;
   padding: 78px 0 84px;
@@ -1066,59 +1074,50 @@ h3 {
   }
 }
 
-@media (min-width: 1280px) {
-  :root {
-    --container: 1480px;
-  }
-
-  .container,
-  .nav {
-    width: min(100% - 72px, var(--container));
-  }
-
+@media (min-width: 1180px) {
   .hero {
-    padding: 92px 0 98px;
+    padding: clamp(78px, 5.2vw, 104px) 0 clamp(84px, 5.6vw, 112px);
   }
 
   .hero-grid {
     grid-template-columns: minmax(0, 1.04fr) minmax(460px, 0.96fr);
-    gap: clamp(64px, 6vw, 112px);
+    gap: clamp(56px, 5vw, 118px);
   }
 
   h1 {
     max-width: 900px;
-    font-size: 6.6rem;
+    font-size: clamp(5.9rem, 7vw, 7.4rem);
   }
 
   .hero-lead {
     max-width: 760px;
-    font-size: 2rem;
+    font-size: clamp(1.85rem, 2vw, 2.15rem);
   }
 
   .hero-text {
     max-width: 720px;
-    font-size: 1.12rem;
+    font-size: clamp(1.05rem, 1.1vw, 1.18rem);
   }
 
   .portrait-card {
-    min-height: 590px;
-    padding-left: 2.8rem;
+    min-height: clamp(500px, 34vw, 760px);
+    padding-left: clamp(2.2rem, 2.2vw, 3.4rem);
   }
 
   .portrait-frame {
-    width: min(100%, 480px);
+    width: min(100%, clamp(386px, 30vw, 640px));
   }
 
   .portrait-media {
-    min-height: 540px;
+    min-height: clamp(430px, 33vw, 730px);
   }
 
   .section {
-    padding: 108px 0;
+    padding: clamp(92px, 5.6vw, 120px) 0;
   }
 
   .results-section {
-    padding-top: 92px;
+    padding-top: clamp(78px, 4.8vw, 104px);
   }
 }
 
@@ -1191,11 +1190,12 @@ h3 {
 @media (max-width: 760px) {
   :root {
     --header-height: 68px;
+    --page-gutter: 14px;
   }
 
   .container,
   .nav {
-    width: min(100% - 28px, var(--container));
+    width: min(calc(100% - (var(--page-gutter) * 2)), var(--container));
   }
 
   .brand-text {
