@@ -11,7 +11,7 @@
   --teal: #2c8b83;
   --teal-soft: #dff2ef;
   --amber: #bd7a2f;
-  --shadow: 0 24px 70px rgba(16, 32, 51, 0.12);
+  --shadow: 0 18px 42px rgba(16, 32, 51, 0.09);
   --radius: 8px;
   --container: clamp(1120px, 94vw, 2600px);
   --page-gutter: clamp(20px, 3vw, 56px);
@@ -217,9 +217,7 @@ li + li {
 }
 
 .section-band {
-  background:
-    linear-gradient(180deg, rgba(245, 247, 250, 0.98), rgba(232, 238, 245, 0.78)),
-    var(--paper);
+  background: var(--paper);
 }
 
 .section-muted {
@@ -232,6 +230,7 @@ li + li {
   display: flex;
   align-items: center;
   padding: 78px 0 84px;
+  background: linear-gradient(180deg, #f7f9fb, #eef3f8);
 }
 
 .page-hero {
@@ -254,16 +253,13 @@ li + li {
 .hero-grid::before {
   content: "";
   position: absolute;
-  top: 8%;
-  right: -4%;
-  bottom: 5%;
-  width: 52%;
+  top: 12%;
+  right: 0;
+  bottom: 10%;
+  width: 48%;
   z-index: 0;
-  border-radius: 120px 32px 120px 42px;
-  background:
-    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.54) 30%, rgba(232, 238, 245, 0.5)),
-    radial-gradient(ellipse at 76% 18%, rgba(44, 139, 131, 0.16), transparent 48%),
-    radial-gradient(ellipse at 30% 86%, rgba(189, 122, 47, 0.1), transparent 54%);
+  border-radius: 72px 24px 72px 28px;
+  background: rgba(255, 255, 255, 0.5);
   pointer-events: none;
 }
 
@@ -405,57 +401,35 @@ h3 {
   display: grid;
   place-items: center;
   padding: 1.6rem 0 1.6rem 2.2rem;
-  isolation: isolate;
 }
 
 .portrait-card::before {
   content: "";
   position: absolute;
-  inset: 2% -4% 0 4%;
-  z-index: -2;
-  border-radius: 36px 120px 42px 110px;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(245, 247, 250, 0.18) 52%, rgba(232, 238, 245, 0.58)),
-    radial-gradient(ellipse at 72% 18%, rgba(44, 139, 131, 0.2), transparent 46%),
-    radial-gradient(ellipse at 18% 82%, rgba(189, 122, 47, 0.13), transparent 50%),
-    linear-gradient(150deg, rgba(21, 38, 65, 0.08), rgba(255, 255, 255, 0.2));
-  filter: blur(0);
+  inset: 4% 2% 4% 8%;
+  z-index: 0;
+  border-radius: 34px 96px 38px 88px;
+  background: #e4edf4;
+  pointer-events: none;
 }
 
 .portrait-card::after {
-  content: "";
-  position: absolute;
-  inset: 11% 3% 12% 0;
-  z-index: -1;
-  border-radius: 34px 96px 38px 88px;
-  background:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.62) 44%, rgba(255, 255, 255, 0.12)),
-    linear-gradient(165deg, rgba(44, 139, 131, 0.12), rgba(21, 38, 65, 0.05) 55%, rgba(189, 122, 47, 0.08));
-  box-shadow: 0 28px 70px rgba(16, 32, 51, 0.08);
+  content: none;
 }
 
 .portrait-frame {
   position: relative;
+  z-index: 1;
   width: min(100%, 386px);
   overflow: hidden;
   padding: 0;
   border-radius: 36px 88px 34px 92px;
-  background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.56), rgba(232, 238, 245, 0.2)),
-    linear-gradient(155deg, rgba(44, 139, 131, 0.14), rgba(189, 122, 47, 0.08));
-  box-shadow: 0 22px 54px rgba(16, 32, 51, 0.1);
+  background: var(--white);
+  box-shadow: 0 16px 34px rgba(16, 32, 51, 0.1);
 }
 
 .portrait-frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: inherit;
-  background:
-    linear-gradient(180deg, transparent 52%, rgba(16, 32, 51, 0.05)),
-    linear-gradient(100deg, rgba(255, 255, 255, 0.1), transparent 32%, rgba(255, 255, 255, 0.08));
-  pointer-events: none;
+  content: none;
 }
 
 .portrait-media {
@@ -464,11 +438,7 @@ h3 {
   min-height: 430px;
   overflow: hidden;
   border-radius: inherit;
-  background:
-    radial-gradient(ellipse at 68% 22%, rgba(44, 139, 131, 0.18), transparent 48%),
-    radial-gradient(ellipse at 18% 78%, rgba(189, 122, 47, 0.14), transparent 52%),
-    linear-gradient(160deg, rgba(21, 38, 65, 0.06), rgba(255, 255, 255, 0.62) 42%, rgba(44, 139, 131, 0.1)),
-    var(--paper);
+  background: var(--paper);
 }
 
 .portrait-media img {
@@ -1071,8 +1041,12 @@ h3 {
   }
 
   .hero-grid {
-    grid-template-columns: minmax(0, 1.04fr) minmax(460px, 0.96fr);
-    gap: clamp(56px, 5vw, 118px);
+    grid-template-columns: minmax(0, 1.16fr) minmax(430px, 0.84fr);
+    gap: clamp(64px, 6vw, 150px);
+  }
+
+  .hero-grid::before {
+    display: none;
   }
 
   h1 {
@@ -1091,16 +1065,16 @@ h3 {
   }
 
   .portrait-card {
-    min-height: clamp(500px, 34vw, 760px);
+    min-height: clamp(500px, 31vw, 650px);
     padding-left: clamp(2.2rem, 2.2vw, 3.4rem);
   }
 
   .portrait-frame {
-    width: min(100%, clamp(386px, 32vw, 720px));
+    width: min(100%, clamp(386px, 28vw, 590px));
   }
 
   .portrait-media {
-    min-height: clamp(430px, 34vw, 800px);
+    min-height: clamp(430px, 31vw, 650px);
   }
 
   .section {
