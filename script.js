@@ -3,10 +3,21 @@ const navToggle = document.querySelector("[data-nav-toggle]");
 const navMenu = document.querySelector("[data-nav-menu]");
 const navLinks = [...document.querySelectorAll(".nav-links a")];
 const currentPage = document.body.dataset.page;
+const currentLanguage = document.documentElement.lang === "en" ? "en" : "da";
 const mobileNavQuery = window.matchMedia("(max-width: 760px)");
 const navToggleLabel = navToggle?.querySelector(".sr-only");
 let resizeTimer;
 let isResizeMode = false;
+const menuLabels = {
+  da: {
+    open: "Åbn menu",
+    close: "Luk menu",
+  },
+  en: {
+    open: "Open menu",
+    close: "Close menu",
+  },
+};
 
 function setHeaderState() {
   header?.classList.toggle("is-scrolled", window.scrollY > 16);
@@ -46,7 +57,7 @@ function updateMenuA11y() {
   });
 
   if (navToggleLabel) {
-    navToggleLabel.textContent = isOpen ? "Luk menu" : "Åbn menu";
+    navToggleLabel.textContent = isOpen ? menuLabels[currentLanguage].close : menuLabels[currentLanguage].open;
   }
 }
 
