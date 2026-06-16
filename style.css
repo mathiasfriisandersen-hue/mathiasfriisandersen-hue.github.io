@@ -11,7 +11,7 @@
   --teal: #2c8b83;
   --teal-soft: #dff2ef;
   --amber: #bd7a2f;
-  --shadow: 0 18px 42px rgba(16, 32, 51, 0.09);
+  --shadow: 0 14px 30px rgba(16, 32, 51, 0.08);
   --radius: 8px;
   --container: clamp(1120px, 94vw, 2600px);
   --page-gutter: clamp(20px, 3vw, 56px);
@@ -38,6 +38,28 @@ body {
 
 body.nav-open {
   overflow: hidden;
+}
+
+.is-resizing *,
+.is-resizing *::before,
+.is-resizing *::after {
+  transition-duration: 0.01ms !important;
+  animation-duration: 0.01ms !important;
+}
+
+.is-resizing .portrait-card::before,
+.is-resizing .hero-grid::before {
+  content: none !important;
+}
+
+.is-resizing .portrait-frame,
+.is-resizing .btn,
+.is-resizing .metric-card,
+.is-resizing .project-card,
+.is-resizing .highlight-card,
+.is-resizing .info-card,
+.is-resizing .case-card {
+  box-shadow: none !important;
 }
 
 
@@ -225,12 +247,12 @@ li + li {
 }
 
 .hero {
-  overflow: hidden;
+  overflow: clip;
   min-height: min(calc(100vh - var(--header-height)), 980px);
   display: flex;
   align-items: center;
   padding: 78px 0 84px;
-  background: linear-gradient(180deg, #f7f9fb, #eef3f8);
+  background: #f2f6fa;
 }
 
 .page-hero {
@@ -401,6 +423,7 @@ h3 {
   display: grid;
   place-items: center;
   padding: 1.6rem 0 1.6rem 2.2rem;
+  contain: paint;
 }
 
 .portrait-card::before {
@@ -408,7 +431,7 @@ h3 {
   position: absolute;
   inset: 4% 2% 4% 8%;
   z-index: 0;
-  border-radius: 34px 96px 38px 88px;
+  border-radius: 32px;
   background: #e4edf4;
   pointer-events: none;
 }
@@ -421,11 +444,11 @@ h3 {
   position: relative;
   z-index: 1;
   width: min(100%, 386px);
-  overflow: hidden;
+  overflow: clip;
   padding: 0;
-  border-radius: 36px 88px 34px 92px;
+  border-radius: 32px;
   background: var(--white);
-  box-shadow: 0 16px 34px rgba(16, 32, 51, 0.1);
+  box-shadow: 0 12px 24px rgba(16, 32, 51, 0.08);
 }
 
 .portrait-frame::before {
@@ -436,7 +459,7 @@ h3 {
   position: relative;
   aspect-ratio: 4 / 5;
   min-height: 430px;
-  overflow: hidden;
+  overflow: clip;
   border-radius: inherit;
   background: var(--paper);
 }
@@ -1037,12 +1060,12 @@ h3 {
 
 @media (min-width: 1180px) {
   .hero {
-    padding: clamp(78px, 5.2vw, 104px) 0 clamp(84px, 5.6vw, 112px);
+    padding: 92px 0 100px;
   }
 
   .hero-grid {
-    grid-template-columns: minmax(0, 1.16fr) minmax(430px, 0.84fr);
-    gap: clamp(64px, 6vw, 150px);
+    grid-template-columns: minmax(0, 1.18fr) minmax(430px, 0.82fr);
+    gap: 92px;
   }
 
   .hero-grid::before {
@@ -1051,38 +1074,83 @@ h3 {
 
   h1 {
     max-width: 900px;
-    font-size: clamp(5.9rem, 7vw, 7.4rem);
+    font-size: 6.45rem;
   }
 
   .hero-lead {
     max-width: 760px;
-    font-size: clamp(1.85rem, 2vw, 2.15rem);
+    font-size: 1.95rem;
   }
 
   .hero-text {
     max-width: 720px;
-    font-size: clamp(1.05rem, 1.1vw, 1.18rem);
+    font-size: 1.1rem;
   }
 
   .portrait-card {
-    min-height: clamp(500px, 31vw, 650px);
-    padding-left: clamp(2.2rem, 2.2vw, 3.4rem);
+    min-height: 560px;
+    padding-left: 2.6rem;
   }
 
   .portrait-frame {
-    width: min(100%, clamp(386px, 28vw, 590px));
+    width: min(100%, 500px);
   }
 
   .portrait-media {
-    min-height: clamp(430px, 31vw, 650px);
+    min-height: 560px;
   }
 
   .section {
-    padding: clamp(92px, 5.6vw, 120px) 0;
+    padding: 108px 0;
   }
 
   .results-section {
-    padding-top: clamp(78px, 4.8vw, 104px);
+    padding-top: 96px;
+  }
+}
+
+
+@media (min-width: 1680px) {
+  .hero-grid {
+    gap: 116px;
+  }
+
+  h1 {
+    font-size: 6.95rem;
+  }
+
+  .portrait-card {
+    min-height: 610px;
+  }
+
+  .portrait-frame {
+    width: min(100%, 550px);
+  }
+
+  .portrait-media {
+    min-height: 610px;
+  }
+}
+
+@media (min-width: 2180px) {
+  .hero-grid {
+    gap: 140px;
+  }
+
+  h1 {
+    font-size: 7.4rem;
+  }
+
+  .portrait-card {
+    min-height: 650px;
+  }
+
+  .portrait-frame {
+    width: min(100%, 590px);
+  }
+
+  .portrait-media {
+    min-height: 650px;
   }
 }
 

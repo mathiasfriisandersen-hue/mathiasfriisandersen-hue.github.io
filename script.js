@@ -5,9 +5,24 @@ const navLinks = [...document.querySelectorAll(".nav-links a")];
 const currentPage = document.body.dataset.page;
 const mobileNavQuery = window.matchMedia("(max-width: 760px)");
 const navToggleLabel = navToggle?.querySelector(".sr-only");
+let resizeTimer;
+let isResizeMode = false;
 
 function setHeaderState() {
   header?.classList.toggle("is-scrolled", window.scrollY > 16);
+}
+
+function setResizeMode() {
+  if (!isResizeMode) {
+    document.documentElement.classList.add("is-resizing");
+    isResizeMode = true;
+  }
+
+  window.clearTimeout(resizeTimer);
+  resizeTimer = window.setTimeout(() => {
+    document.documentElement.classList.remove("is-resizing");
+    isResizeMode = false;
+  }, 320);
 }
 
 function closeMenu() {
@@ -78,3 +93,4 @@ setHeaderState();
 updateMenuA11y();
 mobileNavQuery.addEventListener("change", closeMenu);
 window.addEventListener("scroll", setHeaderState, { passive: true });
+window.addEventListener("resize", setResizeMode, { passive: true });
