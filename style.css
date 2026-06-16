@@ -13,7 +13,7 @@
   --amber: #bd7a2f;
   --shadow: 0 24px 70px rgba(16, 32, 51, 0.12);
   --radius: 8px;
-  --container: clamp(1120px, 90vw, 2200px);
+  --container: clamp(1120px, 94vw, 2600px);
   --page-gutter: clamp(20px, 3vw, 56px);
   --header-height: 76px;
 }
@@ -40,12 +40,6 @@ body.nav-open {
   overflow: hidden;
 }
 
-.is-resizing *,
-.is-resizing *::before,
-.is-resizing *::after {
-  transition-duration: 0.01ms !important;
-  animation-duration: 0.01ms !important;
-}
 
 a {
   color: inherit;
@@ -102,7 +96,6 @@ li + li {
   z-index: 20;
   background: rgba(255, 255, 255, 0.92);
   border-bottom: 1px solid rgba(215, 224, 234, 0.65);
-  backdrop-filter: blur(18px);
   transition:
     box-shadow 180ms ease,
     background 180ms ease;
@@ -484,8 +477,6 @@ h3 {
   display: block;
   object-fit: cover;
   object-position: center 42%;
-  -webkit-mask-image: radial-gradient(ellipse at 52% 44%, #000 58%, rgba(0, 0, 0, 0.92) 70%, transparent 98%);
-  mask-image: radial-gradient(ellipse at 52% 44%, #000 58%, rgba(0, 0, 0, 0.92) 70%, transparent 98%);
 }
 
 .portrait-fallback {
@@ -1105,11 +1096,11 @@ h3 {
   }
 
   .portrait-frame {
-    width: min(100%, clamp(386px, 30vw, 640px));
+    width: min(100%, clamp(386px, 32vw, 720px));
   }
 
   .portrait-media {
-    min-height: clamp(430px, 33vw, 730px);
+    min-height: clamp(430px, 34vw, 800px);
   }
 
   .section {
