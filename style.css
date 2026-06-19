@@ -363,8 +363,10 @@ li + li {
   color: var(--teal);
   font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
+  line-height: 1.45;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 h1,
