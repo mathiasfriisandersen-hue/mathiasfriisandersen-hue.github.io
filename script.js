@@ -25,16 +25,16 @@ let isGoogleAnalyticsLoaded = false;
 
 const analyticsLabels = {
   da: {
-    title: "Må jeg bruge analysecookies?",
-    text: "Jeg bruger Google Analytics til at forstå, hvordan hjemmesiden bliver brugt. Analytics indlæses kun, hvis du accepterer. Du kan altid ændre dit valg.",
-    accept: "Acceptér analytics",
+    title: "Denne hjemmeside bruger cookies",
+    text: "Vi bruger nødvendige cookies til at få hjemmesiden til at fungere og, med dit samtykke, statistikcookies til at forstå, hvordan hjemmesiden bruges. Du kan altid ændre dit valg.",
+    accept: "Acceptér alle",
     reject: "Kun nødvendige",
     settings: "Cookieindstillinger",
   },
   en: {
-    title: "May I use analytics cookies?",
-    text: "I use Google Analytics to understand how this website is used. Analytics only loads if you accept, and you can change your choice at any time.",
-    accept: "Accept analytics",
+    title: "This website uses cookies",
+    text: "We use necessary cookies to make the website work and, with your consent, statistics cookies to understand how the website is used. You can change your choice at any time.",
+    accept: "Accept all",
     reject: "Necessary only",
     settings: "Cookie settings",
   },
