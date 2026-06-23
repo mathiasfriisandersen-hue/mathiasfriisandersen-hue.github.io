@@ -19,60 +19,13 @@ const menuLabels = {
   },
 };
 
-const GA_MEASUREMENT_ID = "G-LKCEH8HGQ7";
-const ANALYTICS_CONSENT_KEY = "mfa-analytics-consent";
-let isGoogleAnalyticsLoaded = false;
+function clearLegacyAnalyticsData() {
+  try {
+    localStorage.removeItem("mfa-analytics-consent");
+  } catch {
+    // Storage may be unavailable in privacy-focused browser modes.
+  }
 
-const analyticsLabels = {
-  da: {
-    title: "Denne hjemmeside bruger cookies",
-    text: "Vi bruger nødvendige cookies til at få hjemmesiden til at fungere og, med dit samtykke, statistikcookies til at forstå, hvordan hjemmesiden bruges. Du kan altid ændre dit valg.",
-    accept: "Acceptér alle",
-    reject: "Kun nødvendige",
-    settings: "Cookieindstillinger",
-  },
-  en: {
-    title: "This website uses cookies",
-    text: "We use necessary cookies to make the website work and, with your consent, statistics cookies to understand how the website is used. You can change your choice at any time.",
-    accept: "Accept all",
-    reject: "Necessary only",
-    settings: "Cookie settings",
-  },
-};
-
-window.dataLayer = window.dataLayer || [];
-window.gtag =
-  window.gtag ||
-  function gtag() {
-    window.dataLayer.push(arguments);
-  };
-
-window.gtag("consent", "default", {
-  ad_storage: "denied",
-  ad_user_data: "denied",
-  ad_personalization: "denied",
-  analytics_storage: "denied",
-  wait_for_update: 500,
-});
-
-function loadGoogleAnalytics() {
-  if (isGoogleAnalyticsLoaded) return;
-
-  isGoogleAnalyticsLoaded = true;
-  window.gtag("consent", "update", {
-    analytics_storage: "granted",
-  });
-  window.gtag("js", new Date());
-  window.gtag("config", GA_MEASUREMENT_ID);
-
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
-  script.dataset.googleAnalytics = GA_MEASUREMENT_ID;
-  document.head.append(script);
-}
-
-function removeAnalyticsCookies() {
   const hostname = window.location.hostname;
   const rootDomain = hostname.split(".").slice(-2).join(".");
 
@@ -83,76 +36,6 @@ function removeAnalyticsCookies() {
       document.cookie = `${name}=; Max-Age=0; path=/; domain=.${rootDomain}; SameSite=Lax`;
     }
   });
-}
-
-function saveAnalyticsConsent(value) {
-  localStorage.setItem(ANALYTICS_CONSENT_KEY, value);
-  document.querySelector("[data-cookie-banner]")?.remove();
-
-  if (value === "granted") {
-    loadGoogleAnalytics();
-  } else {
-    window.gtag("consent", "update", { analytics_storage: "denied" });
-    removeAnalyticsCookies();
-  }
-
-  showCookieSettings();
-}
-
-function showCookieSettings() {
-  if (document.querySelector("[data-cookie-settings]")) return;
-
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = "cookie-settings";
-  button.dataset.cookieSettings = "";
-  button.textContent = analyticsLabels[currentLanguage].settings;
-  button.addEventListener("click", showCookieBanner);
-  document.body.append(button);
-}
-
-function showCookieBanner() {
-  document.querySelector("[data-cookie-settings]")?.remove();
-  if (document.querySelector("[data-cookie-banner]")) return;
-
-  const labels = analyticsLabels[currentLanguage];
-  const banner = document.createElement("section");
-  banner.className = "cookie-banner";
-  banner.dataset.cookieBanner = "";
-  banner.setAttribute("aria-label", labels.title);
-  banner.innerHTML = `
-    <div class="cookie-banner__content">
-      <div>
-        <h2>${labels.title}</h2>
-        <p>${labels.text}</p>
-      </div>
-      <div class="cookie-banner__actions">
-        <button class="btn btn-primary" type="button" data-analytics-accept>${labels.accept}</button>
-        <button class="btn btn-secondary" type="button" data-analytics-reject>${labels.reject}</button>
-      </div>
-    </div>
-  `;
-
-  banner.querySelector("[data-analytics-accept]").addEventListener("click", () => {
-    saveAnalyticsConsent("granted");
-  });
-  banner.querySelector("[data-analytics-reject]").addEventListener("click", () => {
-    saveAnalyticsConsent("denied");
-  });
-  document.body.append(banner);
-}
-
-function initializeAnalyticsConsent() {
-  const consent = localStorage.getItem(ANALYTICS_CONSENT_KEY);
-
-  if (consent === "granted") {
-    loadGoogleAnalytics();
-    showCookieSettings();
-  } else if (consent === "denied") {
-    showCookieSettings();
-  } else {
-    showCookieBanner();
-  }
 }
 
 function setHeaderState() {
@@ -238,7 +121,7 @@ document.querySelectorAll(".reveal").forEach((element) => {
 
 setHeaderState();
 updateMenuA11y();
-initializeAnalyticsConsent();
+clearLegacyAnalyticsData();
 mobileNavQuery.addEventListener("change", closeMenu);
 window.addEventListener("scroll", setHeaderState, { passive: true });
 window.addEventListener("resize", setResizeMode, { passive: true });
