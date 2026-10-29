@@ -1501,3 +1501,15 @@ h3 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Keep linked content visible below the sticky navigation. */
+#evoia,
+#ai-projects,
+#practical-ai,
+#volunteering {
+  scroll-margin-top: 110px;
+}
+
+#practical-ai .body-copy {
+  margin-top: 1.5rem;
+}
